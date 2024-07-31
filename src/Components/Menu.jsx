@@ -31,7 +31,7 @@ export const Menu = () => {
                                 <div className='flex items-center justify-center'>
                                     <img className='w-[160px]' src={logo} alt="logo" />
                                     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                                    <div onClick={()=>{dispatch(changeMenubar("closed"))}} className='text-[25px]'><i className="fa-solid fa-xmark rounded bg-[#C40C0C] text-[white] p-[5px]"></i></div>
+                                    <div onClick={() => { dispatch(changeMenubar("closed")) }} className='text-[25px]'><i className="fa-solid fa-xmark rounded bg-[#C40C0C] text-[white] p-[5px]"></i></div>
                                 </div>
                             </> :
                             <>

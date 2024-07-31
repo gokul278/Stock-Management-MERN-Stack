@@ -38,7 +38,7 @@ export const Header = () => {
     }
 
     return (
-        <div className={` ${menu.menustatus === "opened"? '':'ml-[0.4%]'} w-[99.2%] rounded bg-[#fff] mt-[1vh] h-[8vh] flex justify-between items-center`}>
+        <div className={`w-[99%] mt-[1vh] rounded bg-[#fff] h-[8vh] flex justify-between items-center`}>
             <div onClick={changestatus} className='h-[6vh] ml-[10px] rounded bg-[#1679AB] w-[45px] text-[#fff] text-[30px] flex justify-center cursor-pointer items-center'>
                 <i className="fa-solid fa-bars"></i>
             </div>

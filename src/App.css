@@ -212,3 +212,61 @@
 .logoutbtn{
   transition: background-color 0.3s ease, color 0.3s ease;
 }
+
+@keyframes slideDown {
+  0% {
+    opacity: 0;
+    transform: translateY(-20px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes slideUp {
+  0% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  100% {
+    opacity: 0;
+    transform: translateY(-20px);
+  }
+}
+
+.animate-slideDown {
+  animation: slideDown 0.2s ease-out forwards;
+}
+
+.animate-slideUp {
+  animation: slideUp 0.2s ease-out forwards;
+}
+
+.billhistory {
+  font-family: 'PT serif', cursive; /* Optional: make the table take full width */
+  border-collapse: collapse; /* Collapse borders to avoid double borders */
+}
+
+.billhistory th {
+  border: 2px solid black; /* Change #ccc to your desired border color */
+  padding: 8px; /* Optional: padding for cells */
+  text-align: center;
+  background-color: #1679AB; /* Optional: align text to the left */
+}
+
+.billhistory td {
+  font-weight: 700;
+  border: 2px solid black; /* Change #ccc to your desired border color */
+  padding: 8px; /* Optional: padding for cells */
+  text-align: center; /* Optional: align text to the left */
+}
+
+.billhistory thead {
+  background-color: #f2f2f2; /* Change to your desired header color */
+}
+
+/* Optional: Add hover effect on rows */
+.billhistory tr:hover {
+  background-color: #e0e0e0; /* Change to your desired hover color */
+}
