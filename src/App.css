@@ -252,7 +252,7 @@
   border: 2px solid black; /* Change #ccc to your desired border color */
   padding: 8px; /* Optional: padding for cells */
   text-align: center;
-  background-color: #1679AB; /* Optional: align text to the left */
+  background-color: #1679AB;
 }
 
 .billhistory td {
@@ -269,4 +269,94 @@
 /* Optional: Add hover effect on rows */
 .billhistory tr:hover {
   background-color: #e0e0e0; /* Change to your desired hover color */
+}
+
+.btnloader {
+  position: relative;
+  width: 25px;
+  height: 25px;
+  border-radius: 10px;
+}
+
+.btnloader div {
+  width: 8%;
+  height: 24%;
+  background: rgb(255, 255, 255);
+  position: absolute;
+  left: 50%;
+  top: 40%;
+  opacity: 0;
+  border-radius: 50px;
+  box-shadow: 0 0 3px rgba(0,0,0,0.2);
+  animation: fade458 1s linear infinite;
+}
+
+@keyframes fade458 {
+  from {
+    opacity: 1;
+  }
+
+  to {
+    opacity: 0.25;
+  }
+}
+
+.btnloader .bar1 {
+  transform: rotate(0deg) translate(0, -130%);
+  animation-delay: 0s;
+}
+
+.btnloader .bar2 {
+  transform: rotate(30deg) translate(0, -130%);
+  animation-delay: -1.1s;
+}
+
+.btnloader .bar3 {
+  transform: rotate(60deg) translate(0, -130%);
+  animation-delay: -1s;
+}
+
+.btnloader .bar4 {
+  transform: rotate(90deg) translate(0, -130%);
+  animation-delay: -0.9s;
+}
+
+.btnloader .bar5 {
+  transform: rotate(120deg) translate(0, -130%);
+  animation-delay: -0.8s;
+}
+
+.btnloader .bar6 {
+  transform: rotate(150deg) translate(0, -130%);
+  animation-delay: -0.7s;
+}
+
+.btnloader .bar7 {
+  transform: rotate(180deg) translate(0, -130%);
+  animation-delay: -0.6s;
+}
+
+.btnloader .bar8 {
+  transform: rotate(210deg) translate(0, -130%);
+  animation-delay: -0.5s;
+}
+
+.btnloader .bar9 {
+  transform: rotate(240deg) translate(0, -130%);
+  animation-delay: -0.4s;
+}
+
+.btnloader .bar10 {
+  transform: rotate(270deg) translate(0, -130%);
+  animation-delay: -0.3s;
+}
+
+.btnloader .bar11 {
+  transform: rotate(300deg) translate(0, -130%);
+  animation-delay: -0.2s;
+}
+
+.btnloader .bar12 {
+  transform: rotate(330deg) translate(0, -130%);
+  animation-delay: -0.1s;
 }

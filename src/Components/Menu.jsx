@@ -15,6 +15,7 @@ export const Menu = () => {
 
     const logout = () => {
 
+        localStorage.removeItem("JWTtoken");
         dispatch(changeLoadingStatus(true));
 
         navigate('/', { replace: true });

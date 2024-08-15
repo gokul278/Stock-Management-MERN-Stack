@@ -12,6 +12,8 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useEffect, useState } from "react";
 import { changeLoadingStatus } from "./slices/LoadingStatus.js";
 import { changeMenubar, changeMenumobile } from './slices/MenuStatus';
+import { Unautherized } from "./Pages/Unautherized.jsx";
+import { Timeexpire } from "./Pages/Timeexpire.jsx";
 
 function App() {
   const dispatch = useDispatch();
@@ -55,6 +57,8 @@ function App() {
           <Route path="/stocks" element={<Stocks />} />
           <Route path="/generatebill" element={<GenerateBill />} />
           <Route path="/billhistory" element={<BillHistory />} />
+          <Route path="/unauthorized" element={<Unautherized />} />
+          <Route path="/timeexpire" element={<Timeexpire />} />
           <Route path="*" element={<PagenotFound />} />
         </Routes>
       </BrowserRouter>
