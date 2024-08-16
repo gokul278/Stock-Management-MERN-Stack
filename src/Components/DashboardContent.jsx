@@ -16,6 +16,8 @@ export const DashboardContent = () => {
   const [years, setYears] = useState([]);
   const [showMonth, setShowMonth] = useState([]);
 
+  const [loadingStatus, setLoadingStatus] = useState(true);
+
   useEffect(() => {
     const months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
     const currentYear = new Date().getFullYear();
@@ -70,9 +72,10 @@ export const DashboardContent = () => {
           totalsalesstock: res.data.totalsalesstock
         });
 
-        setTotaldates(res.data.dates); // Dates for the x-axis
+        setTotaldates(res.data.dates);
         setTotalAmounts(res.data.amounts);
-        setTotalStocks(res.data.stocks); // Corresponding amounts for the y-axis
+        setTotalStocks(res.data.stocks);
+        setLoadingStatus(false);
       }
     });
   }, [input.month, input.year, navigate]);
@@ -85,7 +88,8 @@ export const DashboardContent = () => {
         data: totalamounts, // Amounts on the y-axis
         borderColor: '#40a578',
         backgroundColor: '#40a578',
-        fill: true
+        fill: true,
+        borderWidth: 2
       },
       {
         label: 'Total Sales Stock',
@@ -93,6 +97,7 @@ export const DashboardContent = () => {
         borderColor: '#ffdb5c',
         backgroundColor: '#ffdb5c',
         fill: true,
+        borderWidth: 2
       }
     ]
   };
@@ -127,6 +132,7 @@ export const DashboardContent = () => {
               [event.target.name]: event.target.value,
               month: 0
             })
+            setLoadingStatus(true);
           }} >
             {years.reverse().map((yr, index) => (
               <option className='bg-[white] text-[black]' key={index} value={yr} defaultValue={yr === input.year}>{yr}</option>
@@ -140,6 +146,7 @@ export const DashboardContent = () => {
               ...input,
               [event.target.name]: event.target.value
             })
+            setLoadingStatus(true);
           }}>
             {showMonth.map((month, index) => (
               <option className='bg-[white] text-[black]' key={index} value={index} defaultValue={index === input.month}>{month}</option>
@@ -148,33 +155,83 @@ export const DashboardContent = () => {
         </div>
       </div>
 
-      <div className='mt-[40px] flex flex-wrap justify-center lg:justify-around'>
+      <div className='mt-[40px] mb-[40px] flex flex-wrap justify-center lg:justify-around'>
         <div className='w-[250px] rounded h-[150px] bg-[#40A578] flex flex-col justify-center items-center'>
           <div className='w-[50%] text-[16px] text-[black] font-ptserif font-black' align="center">Total Monthly Sales Amount</div>
-          <div className='w-[100%] mt-[15px] text-[25px] text-[black] font-ptserif font-black' align="center">{sales.totalsalesamount} Rs</div>
+          <div className='w-[100%] mt-[15px] text-[25px] text-[black] font-ptserif font-black' align="center">{loadingStatus ? (<div className="btnloader">
+            <div className="bar1"></div>
+            <div className="bar2"></div>
+            <div className="bar3"></div>
+            <div className="bar4"></div>
+            <div className="bar5"></div>
+            <div className="bar6"></div>
+            <div className="bar7"></div>
+            <div className="bar8"></div>
+            <div className="bar9"></div>
+            <div className="bar10"></div>
+            <div className="bar11"></div>
+            <div className="bar12"></div>
+          </div>) : (<>{sales.totalsalesamount} Rs</>)}</div>
         </div>
         <div className='w-[250px] rounded mt-[20px] lg:mt-[0px] h-[150px] bg-[#FFDB5C] flex flex-col justify-center items-center'>
           <div className='w-[50%] text-[16px] text-[black] font-ptserif font-black' align="center">Total Monthly Stock Sales</div>
-          <div className='w-[100%] mt-[15px] text-[25px] text-[black] font-ptserif font-black' align="center">{sales.totalsalesstock}</div>
+          <div className='w-[100%] mt-[15px] text-[25px] text-[black] font-ptserif font-black' align="center">{loadingStatus ? (<div className="btnloader">
+            <div className="bar1"></div>
+            <div className="bar2"></div>
+            <div className="bar3"></div>
+            <div className="bar4"></div>
+            <div className="bar5"></div>
+            <div className="bar6"></div>
+            <div className="bar7"></div>
+            <div className="bar8"></div>
+            <div className="bar9"></div>
+            <div className="bar10"></div>
+            <div className="bar11"></div>
+            <div className="bar12"></div>
+          </div>) : (<>{sales.totalsalesstock}</>)}</div>
         </div>
       </div>
 
-      <div className='mt-[40px]'>
+      <div className='h-[47vh]'>
         <label className='text-[black] text-[20px] font-ptserif font-bold ml-[25px]'>Analytic Graphs</label>
-        <div className='flex justify-center items-center mt-[10px]'>
-          <div className='w-[1080px] h-[300px] rounded border-2 border-[#1679AB] bg-[#ffffff] overflow-x-auto'>
-            <Line
-              data={graphdata}
-              options={{
-                ...options,
-                responsive: true, // Make the chart responsive
-                maintainAspectRatio: false // Prevent maintaining the aspect ratio
-              }}
-              style={{ width: '100%', height: '100%' }} // Set width and height to 100%
-            />
+        <div className='mt-[10px] w-[100%] h-[43vh] overflow-x-auto'>
+          <div className='flex justify-center items-center w-[1080px] lg:w-full h-[280px] lg:h-[300px] overflow-x-auto'>
+            <div className='w-[1080px] lg:w-[99%] h-[280px] lg:h-[300px] rounded border-2 border-[#1679AB] bg-[#ffffff] overflow-auto flex justify-center items-center'>
+              {
+                loadingStatus ? (
+                  <div className="flex justify-center w-[150px] h-[50px] bg-[#000000b0] p-[10px] rounded">
+                    <span className="text-[20px] font-ptserif text-[#FFF]">Loading </span> &nbsp;&nbsp;&nbsp;
+                    <div className="btnloader">
+                      <div className="bar1 "></div>
+                      <div className="bar2"></div>
+                      <div className="bar3"></div>
+                      <div className="bar4"></div>
+                      <div className="bar5"></div>
+                      <div className="bar6"></div>
+                      <div className="bar7"></div>
+                      <div className="bar8"></div>
+                      <div className="bar9"></div>
+                      <div className="bar10"></div>
+                      <div className="bar11"></div>
+                      <div className="bar12"></div>
+                    </div>
+                  </div>
+                ) : (
+                  <Line
+                    data={graphdata}
+                    options={{
+                      ...options,
+                      responsive: true, // Make the chart responsive
+                      maintainAspectRatio: false // Prevent maintaining the aspect ratio
+                    }}
+                    style={{ width: '100%', height: '100%' }} // Set width and height to 100%
+                  />
+                )
+              }
+            </div>
           </div>
-        </div>
 
+        </div>
       </div>
     </div>
   )

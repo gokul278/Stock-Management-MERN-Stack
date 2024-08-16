@@ -64,7 +64,7 @@ export const BillingsContent = () => {
 
     }
 
-  })
+  },[searchText,navigate])
 
   //Adding to Cart
   const [cartData, setCartData] = useState([]);

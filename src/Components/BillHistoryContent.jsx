@@ -93,7 +93,7 @@ export const BillHistoryContent = () => {
         }
       });
     }
-  });
+  },[date.fromDate, date.toDate, date.setStatus, navigate]);
 
   const clearInput = () => {
     setDate({

@@ -144,7 +144,7 @@ export const StocksContent = () => {
         }
       });
     }
-  });
+  },[navigate, search.searchtext]);
 
 
   // Remove Stock
