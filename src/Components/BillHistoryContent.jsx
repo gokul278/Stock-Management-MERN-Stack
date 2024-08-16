@@ -174,8 +174,8 @@ export const BillHistoryContent = () => {
         </div>
       </div>
       <div className='h-[66vh] mt-[1vh] w-[100%] flex flex-col items-center overflow-x-auto overflow-y-auto'>
-        <div className='w-[1020px]'>
-          <table className='billhistory'>
+        <div className='table-responsive'>
+          <table className='billhistory w-full'>
             <thead>
               <tr>
                 <th scope='row' className='w-[150px]'>Date & Time</th>

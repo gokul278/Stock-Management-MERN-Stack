@@ -64,7 +64,7 @@ export const Menu = () => {
                             dispatch(changeLoadingStatus(true));
                             navigate('/stocks', { replace: true });
                         }}>
-                            <div className='optionname'>Stocks</div>
+                            <div className='optionname'>Products</div>
                             <div className='optionicon'><i className="fa-regular fa-clipboard"></i></div>
                         </div>
                         <div className={menu.page === "generatebill" ? 'activeoptions' : 'options'} onClick={() => {

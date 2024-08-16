@@ -392,7 +392,7 @@ export const StocksContent = () => {
                         </div>
                       </div>
                     ) : (
-                      <>Add Product &nbsp;<i className="fa-solid fa-cart-shopping"></i></>
+                      <>Add Product &nbsp;<i class="fa-solid fa-square-plus"></i></>
                     )
                   }
                 </button>
@@ -546,7 +546,7 @@ export const StocksContent = () => {
             setNewstock({ ...newstock, isopen: true });
           }}
         >
-          Add Product &nbsp;<i className="fa-solid fa-folder-plus"></i>
+          Add Product &nbsp;<i class="fa-solid fa-square-plus"></i>
         </button>
       </div>
 

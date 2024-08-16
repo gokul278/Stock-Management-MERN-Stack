@@ -360,3 +360,12 @@
   transform: rotate(330deg) translate(0, -130%);
   animation-delay: -0.1s;
 }
+
+.table-responsive {
+  width: 100%;
+  overflow-x: auto;
+}
+
+.table-responsive table {
+  min-width: 600px; /* Ensure table has a minimum width */
+}

@@ -17,7 +17,7 @@ export const Header = () => {
         } else if (menu.page === "billings") {
             setMenuname("Billings");
         } else if (menu.page === "stocks") {
-            setMenuname("Stocks");
+            setMenuname("Products");
         } else if (menu.page === "generatebill") {
             setMenuname("Generate Bill");
         } else if (menu.page === "billhistory") {

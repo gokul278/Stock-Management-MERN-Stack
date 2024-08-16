@@ -64,7 +64,7 @@ export const BillingsContent = () => {
 
     }
 
-  },[searchText,navigate])
+  }, [searchText, navigate])
 
   //Adding to Cart
   const [cartData, setCartData] = useState([]);
@@ -149,7 +149,7 @@ export const BillingsContent = () => {
           setQuantity([]);
           setBillLoading(false);
           closingmenu();
-          swal("Good job!", "You Bill ID " + res.data.bill_id, "success");
+          swal("Good job!", "Your Bill ID " + res.data.bill_id, "success");
         }
       });
     }
@@ -199,33 +199,74 @@ export const BillingsContent = () => {
                               </div>
 
                               <div className='min-w-[220px] h-[180px] flex flex-col items-center justify-center rounded-r bg-[#E0E0E0] px-4'>
-                                <input
-                                  type='number'
-                                  className='w-[70px] border border-[white] h-[40px] text-[20px] text-center rounded font-ptserif font-bold focus:border-[#1679AB] focus:outline-none'
-                                  min="1"
-                                  max={element.product_stocks}
-                                  name={element.product_id}
-                                  onInput={(event) => {
+                                <div>
+                                  <label
+                                    className='p-[8px] bg-[grey] text-[#fff] rounded mr-[5px] cursor-pointer'
+                                    onClick={() => {
+                                      setQuantity(prevQuantity => prevQuantity.map(q =>
+                                        q.product_id === element.product_id
+                                          ? { ...q, product_quantity: Math.max(1, Number(q.product_quantity) - 1) }
+                                          : q
+                                      ));
 
-                                    setQuantity(prevQuantity => prevQuantity.map(q =>
-                                      q.product_id === event.target.name ? {
-                                        ...q, product_quantity: event.target.value <= 0 ? 1 : element.product_stocks >= event.target.value ? event.target.value : element.product_stocks
-                                      } : q
-                                    ))
+                                      setCartData(prevCartData => prevCartData.map(q =>
+                                        q.product_id === element.product_id
+                                          ? { ...q, quantity: Math.max(1, Number(q.quantity) - 1) }
+                                          : q
+                                      ));
+                                    }}
+                                  >
+                                    <i className="fa-solid fa-minus"></i>
+                                  </label>
 
-                                    setCartData(prevCartData => prevCartData.map(q =>
-                                      q.product_id === event.target.name ? {
-                                        ...q, quantity: event.target.value <= 0 ? 1 : element.product_stocks >= event.target.value ? event.target.value : element.product_stocks
-                                      } : q
-                                    ))
-                                  }}
+                                  <input
+                                    type='number'
+                                    className='w-[70px] border border-[white] h-[40px] text-[20px] text-center rounded font-ptserif font-bold focus:border-[#1679AB] focus:outline-none'
+                                    min="1"
+                                    max={element.product_stocks}
+                                    name={element.product_id}
+                                    onInput={(event) => {
 
-                                  value={(() => {
-                                    const data = quantity.find(data => data.product_id === element.product_id);
-                                    return data ? data.product_quantity : 1;
-                                  })()}
-                                  align="end"
-                                />
+                                      setQuantity(prevQuantity => prevQuantity.map(q =>
+                                        q.product_id === event.target.name ? {
+                                          ...q, product_quantity: event.target.value <= 0 ? 1 : element.product_stocks >= event.target.value ? event.target.value : element.product_stocks
+                                        } : q
+                                      ));
+
+                                      setCartData(prevCartData => prevCartData.map(q =>
+                                        q.product_id === event.target.name ? {
+                                          ...q, quantity: event.target.value <= 0 ? 1 : element.product_stocks >= event.target.value ? event.target.value : element.product_stocks
+                                        } : q
+                                      ));
+                                    }}
+                                    value={(() => {
+                                      const data = quantity.find(data => data.product_id === element.product_id);
+                                      return data ? data.product_quantity : 1;
+                                    })()}
+                                    align="end"
+                                  />
+
+                                  <label
+                                    className='p-[8px] bg-[grey] text-[#fff] rounded ml-[5px] cursor-pointer'
+                                    onClick={() => {
+                                      setQuantity(prevQuantity => prevQuantity.map(q =>
+                                        q.product_id === element.product_id
+                                          ? { ...q, product_quantity: Math.min(element.product_stocks, Number(q.product_quantity) + 1) }
+                                          : q
+                                      ));
+
+                                      setCartData(prevCartData => prevCartData.map(q =>
+                                        q.product_id === element.product_id
+                                          ? { ...q, quantity: Math.min(element.product_stocks, Number(q.quantity) + 1) }
+                                          : q
+                                      ));
+                                    }}
+                                  >
+                                    <i className="fa-solid fa-plus"></i>
+                                  </label>
+
+                                </div>
+
                                 <button className='text-[18px] font-semibold font-ptserif text-[white] px-[20px] bg-[#C40C0C] rounded mt-[20px] pt-[5px] pb-[5px] mb-[5px] flex justify-center items-center cursor-pointer'
                                   onClick={() => {
                                     setCartData(prevCartData => prevCartData.filter(item => item.product_id !== element.product_id))
@@ -399,38 +440,80 @@ export const BillingsContent = () => {
                                   </div>
 
                                   <div className='min-w-[220px] h-[180px] flex flex-col items-center justify-center rounded-r bg-[#E0E0E0] px-4'>
-                                    <input
-                                      name="quantity"
-                                      type='number'
-                                      className='w-[70px] border border-[white] h-[40px] text-[20px] text-center rounded font-ptserif font-bold focus:border-[#1679AB] focus:outline-none'
-                                      min="1"
-                                      max={element.product_stocks}
-                                      id={element._id}
-                                      onInput={(event) => {
-                                        const data = quantity.find(data => data.product_id === element._id);
-                                        if (data) {
-                                          setQuantity(prevQuantity => prevQuantity.map(q =>
-                                            q.product_id === element._id
-                                              ? { ...q, product_quantity: event.target.value <= 0 ? 1 : element.product_stocks >= event.target.value ? event.target.value : element.product_stocks }
-                                              : q
-                                          ));
-                                        } else {
-                                          setQuantity(prevQuantity => [
-                                            ...prevQuantity,
-                                            {
-                                              product_id: element._id,
-                                              product_quantity: event.target.value <= 0 ? 1 : element.product_stocks >= event.target.value ? event.target.value : element.product_stocks
-                                            }
-                                          ]);
-                                        }
-                                      }}
+                                    <div>
 
-                                      value={(() => {
-                                        const data = quantity.find(data => data.product_id === element._id);
-                                        return data ? data.product_quantity : 1;
-                                      })()}
-                                      align="end"
-                                    />
+                                      <label
+                                        className='p-[8px] bg-[grey] text-[#fff] rounded mr-[5px] cursor-pointer'
+                                        onClick={() => {
+                                          const data = quantity.find(data => data.product_id === element._id);
+                                          if (data) {
+                                            setQuantity(prevQuantity => prevQuantity.map(q =>
+                                              q.product_id === element._id
+                                                ? { ...q, product_quantity: Math.max(1, Number(q.product_quantity) - 1) }
+                                                : q
+                                            ));
+                                          }
+                                        }}
+                                      >
+                                        <i className="fa-solid fa-minus"></i>
+                                      </label>
+
+                                      <input
+                                        name="quantity"
+                                        type='number'
+                                        className='w-[60px] border border-[white] h-[40px] text-[20px] text-center rounded font-ptserif font-bold focus:border-[#1679AB] focus:outline-none'
+                                        min="1"
+                                        max={element.product_stocks}
+                                        id={element._id}
+                                        onInput={(event) => {
+                                          const data = quantity.find(data => data.product_id === element._id);
+                                          if (data) {
+                                            setQuantity(prevQuantity => prevQuantity.map(q =>
+                                              q.product_id === element._id
+                                                ? { ...q, product_quantity: event.target.value <= 0 ? 1 : element.product_stocks >= event.target.value ? event.target.value : element.product_stocks }
+                                                : q
+                                            ));
+                                          } else {
+                                            setQuantity(prevQuantity => [
+                                              ...prevQuantity,
+                                              {
+                                                product_id: element._id,
+                                                product_quantity: event.target.value <= 0 ? 1 : element.product_stocks >= event.target.value ? event.target.value : element.product_stocks
+                                              }
+                                            ]);
+                                          }
+                                        }}
+                                        value={(() => {
+                                          const data = quantity.find(data => data.product_id === element._id);
+                                          return data ? data.product_quantity : 1;
+                                        })()}
+                                      />
+
+                                      <label
+                                        className='p-[8px] bg-[grey] text-[#fff] rounded ml-[5px] cursor-pointer'
+                                        onClick={() => {
+                                          const data = quantity.find(data => data.product_id === element._id);
+                                          if (data) {
+                                            setQuantity(prevQuantity => prevQuantity.map(q =>
+                                              q.product_id === element._id
+                                                ? { ...q, product_quantity: Math.min(element.product_stocks, Number(q.product_quantity) + 1) }
+                                                : q
+                                            ));
+                                          } else {
+                                            setQuantity(prevQuantity => [
+                                              ...prevQuantity,
+                                              {
+                                                product_id: element._id,
+                                                product_quantity: 1
+                                              }
+                                            ]);
+                                          }
+                                        }}
+                                      >
+                                        <i className="fa-solid fa-plus"></i>
+                                      </label>
+
+                                    </div>
                                     <button className='text-[18px] font-semibold font-ptserif text-[white] px-[20px] bg-[#40A578] rounded mt-[20px] pt-[5px] pb-[5px] mb-[5px] flex justify-center items-center cursor-pointer'
                                       onClick={() => {
                                         addtocart(element._id)
